@@ -1,11 +1,11 @@
 // node --version # Should be >= 18
 // npm install @google/generative-ai
 
-const {
+import {
     GoogleGenerativeAI,
     HarmCategory,
     HarmBlockThreshold,
-} = require("@google/generative-ai");
+} from "@google/generative-ai";
 
 const MODEL_NAME = "gemini-1.0-pro";
 const API_KEY = "AIzaSyBPyruT72hDVE9ptjIEPici4TESCtSiUxo";
@@ -50,6 +50,7 @@ async function runChat(prompt) {
     const result = await chat.sendMessage(prompt);
     const response = result.response;
     console.log(response.text());
+    return response.text()
 }
 
 export default runChat;
