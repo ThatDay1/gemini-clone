@@ -92,19 +92,16 @@ const Main = () => {
             <div>
               <img src={assets.gallery_icon} alt="gallery icon" />
               <img src={assets.mic_icon} alt="mic icon" />
-              <img
-                onClick={() => onSent()}
-                src={assets.send_icon}
-                alt="send icon"
-              />
+              {input ? (
+                <img
+                  onClick={() => onSent()}
+                  src={assets.send_icon}
+                  alt="send icon"
+                />
+              ) : null}
             </div>
           </div>
-          <p className="bottom-info">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-            quis impedit expedita numquam non repellat, illum suscipit mollitia
-            voluptatem fuga, odio ex placeat animi amet libero ratione voluptate
-            minus consectetur.
-          </p>
+          <p className="bottom-info">Copyright Github: &#169;ThatDay1</p>
         </div>
       </div>
     </div>
