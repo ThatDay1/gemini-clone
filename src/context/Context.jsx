@@ -11,6 +11,12 @@ const ContextProvider = (props) => {
   const [loading, setLoading] = useState(false)
   const [resultData, setResultData] = useState('')
 
+  const delayPara = (index, nextWorld) => {
+    setTimeout(function () {
+      setResultData((prev) => prev + nextWorld)
+    }, 75 * index)
+  }
+
   const onSent = async (prompt) => {
     setResultData('')
     setLoading(true)
@@ -18,11 +24,24 @@ const ContextProvider = (props) => {
     setRecentPrompt(input)
 
     const response = await runChat(input)
-    setResultData(response)
+    let responseArray = response.split('**')
+    let newResponse
+    for (let i = 0; i < responseArray.length; i++) {
+      if (i === 0 || i % 2 !== 1) {
+        newResponse += responseArray[i]
+      } else {
+        newResponse += '<b>' + responseArray[i] + '</b>'
+      }
+    }
+    let newResponse2 = newResponse.split('*').join('</br>')
+    let newResponseArray = newResponse2.split(' ')
+    for (let i = 0; i < newResponseArray.length; i++) {
+      const nextWorld = newResponseArray[i]
+      delayPara(i, nextWorld + ' ')
+    }
     setLoading(false)
     setInput('')
   }
-  onSent('what is react js')
 
   const contextValue = {
     prevPrompts,
